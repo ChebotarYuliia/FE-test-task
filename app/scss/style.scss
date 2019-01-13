@@ -1,0 +1,159 @@
+// mixins
+
+@mixin bp($point) {
+  @if $point == md {
+    @media only screen and (max-width: 991px) {
+      @content;
+    }
+  } @else if $point == sm {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == xs {
+    @media only screen and (max-width: 480px) {
+      @content;
+    }
+  }
+}
+
+
+// variables
+
+$main-font: 'Open Sans', sans-serif;
+$main-color: #302634;
+$accent-color: #142E54;
+$light-grey: #C2CCC5;
+$light-blue: #EAE6DF;
+$simple-color: #A7967E;
+
+
+// main styles
+
+.main-content{
+  position: relative;
+  padding: 0 10px;
+}
+
+.main-content__list{
+  font-size: 14px;
+  font-family: $main-font;
+  color: $main-color;
+  margin: 20px auto;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid $accent-color;
+  width: 300px;
+  @include bp (xs){
+    width: 100%;
+  }
+  li{
+    &:first-child{
+      font-size: 16px;
+      font-family: $main-font;
+      color: $accent-color;
+      text-transform: uppercase;
+      margin: 20px 0;
+      @include bp (xs){
+        font-size: 14px;
+      }
+    }
+    margin: 10px 0;
+  }
+}
+
+#searchInput{
+  border: 1px solid $light-blue;
+  padding: 5px 10px;
+  color: $main-color;
+  font-size: 14px;
+  font-family: $main-font;
+  margin: 10px auto;
+  width: 300px;
+  display: block;
+  outline: none;
+  &::placeholder{
+    color: $main-color;
+  }
+}
+
+.table-wrapper{
+  @include bp (xs){
+    width: 100vw;
+    overflow-x: scroll;
+  }
+}
+
+#table{
+  position: relative;
+  margin: 10px auto;
+  font-family: $main-font;
+  color: $main-color;
+  overflow: hidden;
+  width: 680px;
+  // height: 580px;
+  height: 100%;
+  @include bp (sm){
+    width: 100%;
+  }
+}
+
+#innerContent{
+  tr{
+  border-bottom: 1px solid $light-grey;
+  }
+  td{
+    padding: 5px;
+    text-align: center;
+  }
+}
+
+.table__header{
+  th{
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $accent-color;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 5px solid $light-blue;
+    cursor: pointer;
+    @include bp (sm){
+      font-size: 18px;
+      padding: 10px;
+    }
+    @include bp (xs){
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+}
+
+#pagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  a{
+    display: block;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+    background: transparent;
+    color: $main-color;
+    border: 1px solid $light-grey;
+    margin: 5px;
+    text-decoration: none;
+    &.active{
+      color: $accent-color;
+      border-color: $accent-color;
+      font-weight: 700;
+    }
+    &:hover, &:focus{
+      color: $accent-color;
+      text-decoration: none;
+    }
+  }
+}
