@@ -3,18 +3,12 @@ const gulp = require('gulp'),
   sass = require('gulp-sass'),
   autoprefixer = require('gulp-autoprefixer'),
   server = require('gulp-server-livereload'),
-  babel = require('gulp-babel'),
-  clean = require('gulp-clean');
-
-gulp.task('clean', function() {
-  gulp.src('dist/css/*.css', { read: false }).pipe(clean());
-  gulp.src('dist/js/*.js', { read: false }).pipe(clean());
-});
+  babel = require('gulp-babel');
 
 // Styles Task
 gulp.task(
   'sass',
-  gulp.series(function() {
+  gulp.series(function () {
     return gulp
       .src('./app/scss/*.scss')
       .pipe(
@@ -33,7 +27,7 @@ gulp.task(
 // Scripts Task
 gulp.task(
   'scripts',
-  gulp.series(function() {
+  gulp.series(function () {
     return gulp
       .src('./app/js/*.js')
       .pipe(babel())
@@ -42,12 +36,12 @@ gulp.task(
 );
 
 // Watch Task
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch('./app/scss/*.scss', gulp.series('sass'));
   gulp.watch('./app/js/*.js', gulp.series('scripts'));
 });
 
-gulp.task('webserver', function() {
+gulp.task('webserver', function () {
   gulp.src('./dist').pipe(
     server({
       livereload: true,
@@ -58,4 +52,4 @@ gulp.task('webserver', function() {
 });
 
 // Default Task
-gulp.task('default', gulp.parallel('clean', 'watch', 'webserver'));
+gulp.task('default', gulp.parallel('watch', 'webserver'));
